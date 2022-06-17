@@ -50,7 +50,7 @@ if DEBUG:
     ALLOWED_HOSTS += [
         "192.168.{}.{}".format(i, j) for i in range(256) for j in range(256)
     ]
-    ALLOWED_HOSTS += ["127.0.0.1", "0.0.0.0", "172.17.211.25", "shopifytemplatebe-jvosv7es5a-ey.a.run.app"]
+    ALLOWED_HOSTS += ["127.0.0.1", "0.0.0.0", "172.17.211.25", "dropship-350409.ew.r.appspot.com"]
 
 # Application definition
 
@@ -103,8 +103,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8080",
     "http://localhost:8080",
     "http://127.0.0.1:3000",
-    "https://shopifytemplatebe-jvosv7es5a-ey.a.run.app",
     "http://localhost:3000",
+    "https://dropship-350409.ew.r.appspot.com/",
 ]
 
 ROOT_URLCONF = "urls"
