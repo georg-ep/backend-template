@@ -10,14 +10,14 @@ services:
       - ./app:/app
     env_file: .env
 
-  db:
-    image: postgres:12-alpine
-    ports:
-      - "5431:5431"
-    environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=12345678
+  # db:
+  #   image: postgres:12-alpine
+  #   ports:
+  #     - "5431:5431"
+  #   environment:
+  #     - POSTGRES_DB=app
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=12345678
 
 # volumes:
 #   postgres-data:
