@@ -106,6 +106,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "https://dropship-350409.ew.r.appspot.com",
     "https://api.goshopthemarket.com",
+    "https://goshopthemarket.com"
 ]
 
 ROOT_URLCONF = "urls"
