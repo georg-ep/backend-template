@@ -1,6 +1,11 @@
 from rest_framework import serializers
-from shop.models import Product, CartSession, CartItem, ContactSubmission
+from shop.models import Product, CartSession, CartItem, ContactSubmission, Subscription
 from django.db.models import F, Sum
+
+class SubscribeSerializer(serializers.ModelSerializer):
+    class Meta:
+      model = Subscription
+      fields = ("email",)
 
 class CreateContactSubmissionSerializer(serializers.ModelSerializer):
     class Meta:

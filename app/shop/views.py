@@ -13,7 +13,9 @@ from django.db.models import Sum
 from shop.serializers import CartSerializer
 from django.db.models import Q
 
-# Create your views here.
+
+class SubscribeView(generics.CreateAPIView):
+    serializer_class = serializers.SubscribeSerializer
 
 class CreateContactSubmissionView(generics.CreateAPIView):
     serializer_class = serializers.CreateContactSubmissionSerializer

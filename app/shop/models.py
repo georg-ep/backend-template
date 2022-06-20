@@ -2,8 +2,9 @@ from itertools import product
 from django.db import models
 import uuid
 
-# Create your models here.
 
+class Subscription(models.Model):
+    email = models.CharField(max_length=255, unique=True)
 
 class Product(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False)
