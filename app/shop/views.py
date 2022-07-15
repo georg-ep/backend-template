@@ -23,8 +23,8 @@ class CreateContactSubmissionView(generics.CreateAPIView):
 class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = serializers.ProductDetailSerializer
-    lookup_url_kwarg = "uid"
-    lookup_field = "uid"
+    lookup_url_kwarg = "slug"
+    lookup_field = "slug"
 
 
 def fetch_session(request):
