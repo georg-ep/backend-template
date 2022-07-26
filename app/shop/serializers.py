@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from shop.models import Product, CartSession, CartItem, ContactSubmission, Subscription, Review, ProductSection, ProductImage, ProductColour
+from shop.models import Product, CartSession, CartItem, ContactSubmission, Subscription, Review, ProductSection, ProductImage, ProductColour, Affiliate
 from django.db.models import F, Sum, Avg
+import secrets
 
 class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +11,7 @@ class SubscribeSerializer(serializers.ModelSerializer):
 class CreateContactSubmissionSerializer(serializers.ModelSerializer):
     class Meta:
       model = ContactSubmission
-      fields = "__all__"
+      fields =  ("email", "name", "message",)
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -78,3 +79,28 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
       model = CartSession
       fields = ("line_items", "total", "total_cart_items",)
+
+class CreateAffiliateSerializer(serializers.ModelSerializer):
+    
+    def create(self, validated_data):
+      instance = super().create(validated_data)
+
+      id_s = str(instance.id)
+      upper_alpha = "ABCDEFGHJKLMNPQRSTVWXYZ"
+      random_str = "".join(secrets.choice(upper_alpha) for i in range(8))
+      instance.code = (random_str + id_s)[-8:]
+      instance.save()
+
+      return instance
+
+    class Meta:
+      model = Affiliate
+      fields = ("email", "first_name", "last_name", "code",)
+
+class FetchAffiliateSerializer(serializers.ModelSerializer):
+
+    
+
+    class Meta:
+      model = Affiliate
+      fields = ("email",)

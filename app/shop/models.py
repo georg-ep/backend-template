@@ -1,7 +1,15 @@
-from distutils.command.upload import upload
 from django.db import models
 import uuid
 from core.models import safe_file_path
+import secrets
+
+
+class Affiliate(models.Model):
+    uid = models.UUIDField(default=uuid.uuid4, editable=False)
+    email = models.CharField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    code = models.CharField(max_length=255, default="", null=True, blank=True)
 
 
 class Subscription(models.Model):
@@ -75,5 +83,5 @@ class ContactSubmission(models.Model):
     uid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     email = models.EmailField()
-    phone = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255, null=True, blank=True)
     message = models.TextField()

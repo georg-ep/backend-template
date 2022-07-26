@@ -1,5 +1,6 @@
 from math import prod
 from django.shortcuts import render
+from shop.models import Affiliate
 from rest_framework import generics
 from shop.models import Product
 from shop import serializers
@@ -12,7 +13,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from shop.serializers import CartSerializer
 from django.db.models import Q
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
+class CreateAffiliateView(generics.CreateAPIView):
+    serializer_class = serializers.CreateAffiliateSerializer
+
+class FetchAffiliateView(generics.RetrieveAPIView):
+    serializer_class = serializers.FetchAffiliateSerializer
 
 class SubscribeView(generics.CreateAPIView):
     serializer_class = serializers.SubscribeSerializer

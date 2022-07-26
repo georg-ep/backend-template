@@ -29,6 +29,10 @@ class ProductAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
   list_display = ("__str__", "product",)
 
+@admin.register(models.Affiliate)
+class AffiliateAdmin(admin.ModelAdmin):
+  list_display = ("first_name", "last_name", "email", "code",)
+
 admin.site.register(models.CartSession)
 admin.site.register(models.CartItem)
 admin.site.register(models.ContactSubmission)
