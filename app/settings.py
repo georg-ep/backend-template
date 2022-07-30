@@ -85,7 +85,7 @@ INSTALLED_APPS = [
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 CORS_ALLOW_CREDENTIALS = True
-
+CORS_ORIGIN_ALLOW_ALL = True
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -95,18 +95,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-]
-
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:4200",
-    "http://localhost:4200",
-    "http://127.0.0.1:8080",
-    "http://localhost:8080",
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "https://dropship-350409.ew.r.appspot.com",
-    "https://api.goshopthemarket.com",
-    "https://goshopthemarket.com"
 ]
 
 ROOT_URLCONF = "urls"
