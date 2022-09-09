@@ -54,6 +54,23 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     def get_average_rating(self, obj):
       return obj.reviews.aggregate(average=Avg("stars"))['average']
 
+class ProductListSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True)
+    average_rating = serializers.SerializerMethodField()
+    reduction_perc = serializers.SerializerMethodField()
+
+    class Meta:
+      model = Product
+      exclude = ("id",)
+    
+    def get_reduction_perc(self, obj):
+      price = obj.price
+      compare = obj.compare_at_price
+      return (price * 100 / compare) if compare else None
+
+    def get_average_rating(self, obj):
+      return obj.reviews.aggregate(average=Avg("stars"))['average']
+
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductDetailSerializer()
 
@@ -98,9 +115,6 @@ class CreateAffiliateSerializer(serializers.ModelSerializer):
       fields = ("email", "first_name", "last_name", "code",)
 
 class FetchAffiliateSerializer(serializers.ModelSerializer):
-
-    
-
     class Meta:
       model = Affiliate
       fields = ("email",)

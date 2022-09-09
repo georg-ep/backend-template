@@ -34,6 +34,10 @@ class ProductDetailView(generics.RetrieveAPIView):
     lookup_url_kwarg = "slug"
     lookup_field = "slug"
 
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = serializers.ProductListSerializer
+
 
 def fetch_session(request):
     if not request.session.session_key:
