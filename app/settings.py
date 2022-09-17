@@ -50,7 +50,7 @@ if DEBUG:
     ALLOWED_HOSTS += [
         "192.168.{}.{}".format(i, j) for i in range(256) for j in range(256)
     ]
-    ALLOWED_HOSTS += ["127.0.0.1", "0.0.0.0", "172.17.211.25", "dropship-350409.ew.r.appspot.com", "api.goshopthemarket.com"]
+    ALLOWED_HOSTS += ["127.0.0.1", "0.0.0.0", "172.17.211.25", "api.goshopthemarket.com"]
 
 # Application definition
 

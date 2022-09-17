@@ -22,7 +22,7 @@ class Product(models.Model):
     description = models.TextField(default="", null=True, blank=True)
     compare_at_price = models.DecimalField(max_digits=9, decimal_places=2)
     price = models.DecimalField(max_digits=9, decimal_places=2)
-    shopify_id = models.CharField(max_length=255, editable=False)
+    shopify_id = models.CharField(max_length=255, editable=True)
     slug = models.CharField(max_length=255, default="", unique=True)
 
     def __str__(self):

@@ -23,7 +23,7 @@ class ProductSectionInline(admin.StackedInline):
 class ProductAdmin(admin.ModelAdmin):
   list_display = ("name", "uid", "shopify_id", "price",)
   inlines = [ProductColourInline, ProductImageInline, ProductSectionInline]
-  readonly_fields = ["uid", "shopify_id"]
+  readonly_fields = ["uid"]
 
 @admin.register(models.Review)
 class ReviewAdmin(admin.ModelAdmin):

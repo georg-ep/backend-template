@@ -50,21 +50,9 @@ class CartView(generics.RetrieveAPIView):
     queryset = CartSession.objects.all()
 
     def get_object(self):
+        print(self.request.session.__dict__)
         session = fetch_session(self.request)
         return super().get_queryset().filter(session_id=session).first()
-
-
-@api_view(["GET"])
-def fetch_cart(request):
-    session = fetch_session(request)
-    cart = CartSession.objects.filter(session_id=session)
-    if cart.exists():
-        cart = cart.annotate(cart_items=Sum("items__quantity"))
-
-        serializer = json.dumps(CartSerializer(cart.first()).data)
-        print(serializer)
-        return Response(CartSerializer(cart.first()).data)
-    return Response({"status": "No Cart Found"})
 
 
 def update_cart(cart, data, product, colour, action):

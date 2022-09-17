@@ -49,7 +49,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     def get_reduction_perc(self, obj):
       price = obj.price
       compare = obj.compare_at_price
-      return (price * 100 / compare) if compare else None
+      return round((price * 100 / compare), 0) if compare else None
 
     def get_average_rating(self, obj):
       return obj.reviews.aggregate(average=Avg("stars"))['average']
