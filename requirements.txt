@@ -1,34 +1,93 @@
+# Python web framework for building web applications.
 Django==3.2.6
+
+# Library for interacting with Google Cloud Secret Manager.
 google-cloud-secret-manager==2.7.2
+
+# Django authorization library that extends the built-in authorization system.
 django-guardian>=2.1.0,<2.2.0
+
+# Building Web APIs in Django.
 djangorestframework>=3.11.0,<3.12.0
+
+# Extension for adding JWT authentication to Django REST framework.
 djangorestframework-simplejwt>=4.7.2,<4.8
+
+# Handling the server headers required for Cross-Origin Resource Sharing (CORS).
 django-cors-headers>=3.2.1,<3.3.0
+
+# Providing password reset functionality via REST APIs.
 django-rest-passwordreset>=1.1.0,<1.2.0
+
+# Tool for checking Python code against some of the style conventions in PEP 8.
 flake8>=3.7.9,<3.8.0
+
+# Pillow is a Python Imaging Library that adds image processing capabilities to your Python interpreter.
+# Required for ImageFields in Django.
 Pillow>=6.2.1,<6.3.1
+
+# psycopg2 is a PostgreSQL adapter library for Python.
 psycopg2>=2.8.3,<2.9.0
+
+# Python library for JSON Web Tokens (JWT).
 PyJWT==2.1.0
+
+# Allows accurate and cross-platform timezone calculations in Python.
 pytz==2019.3
+
+# Python client library for Redis, a popular in-memory data structure store.
 redis>=3.5.3,<3.6.0
+
+# Django cache backend using Redis as the storage.
 django-redis>=4.12.1,<4.13.0
+
+# Django app that adds automatic caching to your Django models.
 django-cachalot>=2.2.2,<2.3.0
+
+# Library for Google Cloud authentication.
 google-auth>=2.3.0,<2.4.0
+
+# Client library for interacting with Google Cloud Storage.
 google-cloud-storage==1.42.3
+
+# Library for working with Google Cloud Resumable Media.
 google-resumable-media>=2.0.3,<2.1.0
+
+# Library for common protobufs used by Google APIs.
 googleapis-common-protos>=1.6.0,<1.7.0
+
+# Collection of custom storage backends for Django.
 django-storages>=1.8,<1.9
+
+# Django app for adding simple image fields to your models.
 django-stdimage==5.1.1
+
+# Library for generating short, unique, and non-sequential hashes from integers.
 hashids>=1.3.1,<1.4.0
+
+# Django app for adding complex query filtering to your API views.
 django-filter==21.1
-# protobuf>=3.11.2,<3.12.0
+
+# Library for working with Protocol Buffers (protobufs).
+protobuf==3.19.0
+
+# Library for in-app purchase validation.
 inapppy==2.4.4
+
+# Provides a better UI for managing nested objects.
 django-nested-admin==3.3.3
 
-# Swagger substitute for Django 3
+# Swagger substitute for Django 3, providing auto-generated Swagger/OpenAPI documentation.
 drf-yasg==1.20.0
 
+# Package for measuring code coverage during test execution.
 coverage==5.4
+
+# Distributed task queue for Python.
 celery==5.1.2
+
+# Library for handling environment variables.
 django-environ==0.7.0
+
+# Python WSGI HTTP server for running web applications.
 gunicorn==20.1.0

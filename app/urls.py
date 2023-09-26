@@ -13,7 +13,6 @@ admin.site.site_title = 'Django default'
 admin.site.site_url = ''
 
 user_patterns = path('api/users/', include('user.urls'))
-shop_patterns = path('api/', include('shop.urls'))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +27,6 @@ urlpatterns = [
             title="User API"
         )
     ),
-    shop_patterns,
     user_patterns,
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

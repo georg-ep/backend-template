@@ -17,11 +17,12 @@ env = environ.Env(DEBUG=(bool, True), ALLOWED_HOSTS=(list, ["*"]))
 env_file = os.path.join(BASE_DIR, "/.env")
 env.read_env(env_file)
 
-try:
-    _, os.environ["GOOGLE_CLOUD_PROJECT"] = google.auth.default()
-    print("Success auth by google", os.environ["GOOGLE_CLOUD_PROJECT"])
-except google.auth.exceptions.DefaultCredentialsError:
-    pass
+if False:
+    try:
+        _, os.environ["GOOGLE_CLOUD_PROJECT"] = google.auth.default()
+        print("Success auth by google", os.environ["GOOGLE_CLOUD_PROJECT"])
+    except google.auth.exceptions.DefaultCredentialsError:
+        pass
 
 IS_DEVELOPMENT = bool(int(os.environ.get("IS_DEVELOPMENT", False)))
 if not IS_DEVELOPMENT:
@@ -63,25 +64,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
-    # 'cachalot',
     "rest_framework",
     "django_rest_passwordreset",
-    "drf_yasg",  # Swagger app
+    "drf_yasg", 
     "hashids",
-    "shop",
     "core",
     "mail",
 ]
-
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://:12345678@redis:6379/1",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         },
-#     }
-# }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 CORS_ALLOW_CREDENTIALS = True
@@ -187,16 +176,27 @@ AUTH_USER_MODEL = "user.User"
 
 GOOGLE_AUTH_BASE_URL = "https://www.googleapis.com/oauth2/v3/userinfo?alt=json"
 
-DEFAULT_FILE_STORAGE = os.environ.get("STORAGE")
-STATICFILES_STORAGE = os.environ.get("STATIC_STORAGE")
-GS_STATIC_BUCKET_NAME = os.environ.get("GS_STATIC_BUCKET_NAME")
-GS_MEDIA_BUCKET_NAME = os.environ.get("GS_MEDIA_BUCKET_NAME")
 
-MEDIA_URL = os.environ.get("STORAGE_PUBLIC_PATH").format(GS_MEDIA_BUCKET_NAME)
-MEDIA_ROOT = os.environ.get("STORAGE_MEDIA_ROOT")
+if not IS_DEVELOPMENT:
+    DEFAULT_FILE_STORAGE = os.environ.get("STORAGE")
+    STATICFILES_STORAGE = os.environ.get("STATIC_STORAGE")
+    GS_STATIC_BUCKET_NAME = os.environ.get("GS_STATIC_BUCKET_NAME")
+    GS_MEDIA_BUCKET_NAME = os.environ.get("GS_MEDIA_BUCKET_NAME")
 
-STATIC_URL = os.environ.get("STORAGE_PUBLIC_PATH").format(GS_STATIC_BUCKET_NAME)
-STATIC_ROOT = os.environ.get("STORAGE_STATIC_ROOT")
+    MEDIA_URL = os.environ.get("STORAGE_PUBLIC_PATH").format(GS_MEDIA_BUCKET_NAME)
+    MEDIA_ROOT = os.environ.get("STORAGE_MEDIA_ROOT")
+    STATIC_URL = os.environ.get("STORAGE_PUBLIC_PATH").format(GS_STATIC_BUCKET_NAME)
+    STATIC_ROOT = os.environ.get("STORAGE_STATIC_ROOT")
+else:
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    STATIC_URL = "/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+
 
 SESSION_SAVE_EVERY_REQUEST = True
 
@@ -240,8 +240,6 @@ DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
 }
 
 CELERY_BEAT_SCHEDULE = {
-    # Print text each minute
-    # core.tasks.celery_test_task
     "beat-health-check-every-minute": {
         "task": "celery_test_task",
         "schedule": timedelta(minutes=1),
@@ -250,13 +248,7 @@ CELERY_BEAT_SCHEDULE = {
 
 # All celery tasks
 CELERY_TASK_ROUTES = {
-    # core.tasks
-    # Celery health check / example task
     "celery_test_task": {"queue": "main-queue"},
-    # mail.tasks
-    # Tasks for sending various emails
-    "send_verify_email": {"queue": "main-queue"},
-    "send_reset_password_email": {"queue": "main-queue"},
 }
 
 # REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD")
